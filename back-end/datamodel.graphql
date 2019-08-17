@@ -1,6 +1,35 @@
 type User {
-  id: ID! @id
-  name: String!
-  email: String! @unique
-  password: String!
+	id: ID! @id
+	name: String!
+	email: String! @unique
+	password: String!
+	createdAt: DateTime! @createdAt
+	updatedAt: DateTime! @updatedAt
+}
+
+type Director {
+	id: ID! @id
+	name: String!
+	birthday: DateTime
+	country: String
+	createdAt: DateTime! @createdAt
+	updatedAt: DateTime! @updatedAt
+}
+
+type Actor {
+	id: ID! @id
+	name: String!
+	birthday: DateTime
+	country: String
+	createdAt: DateTime! @createdAt
+	updatedAt: DateTime! @updatedAt
+}
+
+type Movie {
+	id: ID! @id
+	title: String!
+	year: Int
+	rating: Int
+	createdAt: DateTime! @createdAt
+	updatedAt: DateTime! @updatedAt
 }
