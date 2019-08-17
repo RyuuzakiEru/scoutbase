@@ -1,7 +1,6 @@
 type User {
 	id: ID! @id
-	name: String!
-	email: String! @unique
+	username: String! @unique
 	password: String!
 	createdAt: DateTime! @createdAt
 	updatedAt: DateTime! @updatedAt
@@ -30,6 +29,8 @@ type Movie {
 	title: String!
 	year: Int
 	rating: Int
+	actors: [Actor]
+	directors: [Director]
 	createdAt: DateTime! @createdAt
 	updatedAt: DateTime! @updatedAt
 }
