@@ -9,6 +9,7 @@ const server = graphqlServer();
 const options = {
   port: 4444,
   endpoint: '/graphql',
+  playground: '/',
 };
 
 server.start(options, ({ port, endpoint }) => {

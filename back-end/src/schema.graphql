@@ -2,6 +2,7 @@
 
 type Mutation {
   createUser(name: String!, password: String!): UserAuth!
+  login(name: String!, password: String!): UserAuth!
 }
 
 type Query {
