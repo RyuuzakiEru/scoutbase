@@ -1,11 +1,12 @@
 # source: http://localhost:4466
-# timestamp: Sun Aug 18 2019 12:44:02 GMT+0200 (hora de verano de Europa central)
+# timestamp: Sun Aug 18 2019 13:14:35 GMT+0200 (hora de verano de Europa central)
 
 type Actor implements Node {
   id: ID!
   name: String!
   birthday: DateTime
   country: String
+  directors(where: DirectorWhereInput, orderBy: DirectorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Director!]
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -25,6 +26,7 @@ input ActorCreateInput {
   name: String!
   birthday: DateTime
   country: String
+  directors: DirectorCreateManyInput
 }
 
 input ActorCreateManyInput {
@@ -303,12 +305,14 @@ input ActorUpdateDataInput {
   name: String
   birthday: DateTime
   country: String
+  directors: DirectorUpdateManyInput
 }
 
 input ActorUpdateInput {
   name: String
   birthday: DateTime
   country: String
+  directors: DirectorUpdateManyInput
 }
 
 input ActorUpdateManyDataInput {
@@ -546,6 +550,9 @@ input ActorWhereInput {
 
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
+  directors_every: DirectorWhereInput
+  directors_some: DirectorWhereInput
+  directors_none: DirectorWhereInput
 }
 
 input ActorWhereUniqueInput {
@@ -1138,7 +1145,6 @@ type Movie implements Node {
   year: Int
   rating: Int
   actors(where: ActorWhereInput, orderBy: ActorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Actor!]
-  directors(where: DirectorWhereInput, orderBy: DirectorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Director!]
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -1159,7 +1165,6 @@ input MovieCreateInput {
   year: Int
   rating: Int
   actors: ActorCreateManyInput
-  directors: DirectorCreateManyInput
 }
 
 """An edge in a connection."""
@@ -1237,7 +1242,6 @@ input MovieUpdateInput {
   year: Int
   rating: Int
   actors: ActorUpdateManyInput
-  directors: DirectorUpdateManyInput
 }
 
 input MovieUpdateManyMutationInput {
@@ -1426,9 +1430,6 @@ input MovieWhereInput {
   actors_every: ActorWhereInput
   actors_some: ActorWhereInput
   actors_none: ActorWhereInput
-  directors_every: DirectorWhereInput
-  directors_some: DirectorWhereInput
-  directors_none: DirectorWhereInput
 }
 
 input MovieWhereUniqueInput {
@@ -1438,28 +1439,28 @@ input MovieWhereUniqueInput {
 type Mutation {
   createUser(data: UserCreateInput!): User!
   createMovie(data: MovieCreateInput!): Movie!
-  createActor(data: ActorCreateInput!): Actor!
   createDirector(data: DirectorCreateInput!): Director!
+  createActor(data: ActorCreateInput!): Actor!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateMovie(data: MovieUpdateInput!, where: MovieWhereUniqueInput!): Movie
-  updateActor(data: ActorUpdateInput!, where: ActorWhereUniqueInput!): Actor
   updateDirector(data: DirectorUpdateInput!, where: DirectorWhereUniqueInput!): Director
+  updateActor(data: ActorUpdateInput!, where: ActorWhereUniqueInput!): Actor
   deleteUser(where: UserWhereUniqueInput!): User
   deleteMovie(where: MovieWhereUniqueInput!): Movie
-  deleteActor(where: ActorWhereUniqueInput!): Actor
   deleteDirector(where: DirectorWhereUniqueInput!): Director
+  deleteActor(where: ActorWhereUniqueInput!): Actor
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertMovie(where: MovieWhereUniqueInput!, create: MovieCreateInput!, update: MovieUpdateInput!): Movie!
-  upsertActor(where: ActorWhereUniqueInput!, create: ActorCreateInput!, update: ActorUpdateInput!): Actor!
   upsertDirector(where: DirectorWhereUniqueInput!, create: DirectorCreateInput!, update: DirectorUpdateInput!): Director!
+  upsertActor(where: ActorWhereUniqueInput!, create: ActorCreateInput!, update: ActorUpdateInput!): Actor!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   updateManyMovies(data: MovieUpdateManyMutationInput!, where: MovieWhereInput): BatchPayload!
-  updateManyActors(data: ActorUpdateManyMutationInput!, where: ActorWhereInput): BatchPayload!
   updateManyDirectors(data: DirectorUpdateManyMutationInput!, where: DirectorWhereInput): BatchPayload!
+  updateManyActors(data: ActorUpdateManyMutationInput!, where: ActorWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyMovies(where: MovieWhereInput): BatchPayload!
-  deleteManyActors(where: ActorWhereInput): BatchPayload!
   deleteManyDirectors(where: DirectorWhereInput): BatchPayload!
+  deleteManyActors(where: ActorWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -1492,16 +1493,16 @@ type PageInfo {
 type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   movies(where: MovieWhereInput, orderBy: MovieOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Movie]!
-  actors(where: ActorWhereInput, orderBy: ActorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Actor]!
   directors(where: DirectorWhereInput, orderBy: DirectorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Director]!
+  actors(where: ActorWhereInput, orderBy: ActorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Actor]!
   user(where: UserWhereUniqueInput!): User
   movie(where: MovieWhereUniqueInput!): Movie
-  actor(where: ActorWhereUniqueInput!): Actor
   director(where: DirectorWhereUniqueInput!): Director
+  actor(where: ActorWhereUniqueInput!): Actor
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   moviesConnection(where: MovieWhereInput, orderBy: MovieOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MovieConnection!
-  actorsConnection(where: ActorWhereInput, orderBy: ActorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ActorConnection!
   directorsConnection(where: DirectorWhereInput, orderBy: DirectorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): DirectorConnection!
+  actorsConnection(where: ActorWhereInput, orderBy: ActorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ActorConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -1513,8 +1514,8 @@ type Query {
 type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   movie(where: MovieSubscriptionWhereInput): MovieSubscriptionPayload
-  actor(where: ActorSubscriptionWhereInput): ActorSubscriptionPayload
   director(where: DirectorSubscriptionWhereInput): DirectorSubscriptionPayload
+  actor(where: ActorSubscriptionWhereInput): ActorSubscriptionPayload
 }
 
 type User implements Node {

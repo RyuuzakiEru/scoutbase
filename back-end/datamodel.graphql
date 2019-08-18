@@ -20,6 +20,7 @@ type Actor {
 	name: String!
 	birthday: DateTime
 	country: String
+	directors: [Director]
 	createdAt: DateTime! @createdAt
 	updatedAt: DateTime! @updatedAt
 }
@@ -30,7 +31,6 @@ type Movie {
 	year: Int
 	rating: Int
 	actors: [Actor]
-	directors: [Director]
 	createdAt: DateTime! @createdAt
 	updatedAt: DateTime! @updatedAt
 }
