@@ -6,7 +6,7 @@ type Mutation {
 }
 
 type Query {
-  hi: String
+  movies(where: MovieWhereInput, orderBy: MovieOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Movie]!
 }
 
 type User{
@@ -17,4 +17,27 @@ type User{
 type UserAuth {
   token: String!
   user: User!
+}
+
+type Movie {
+	id: ID!
+  scoutbase_rating: Float
+	title: String!
+	year: Int
+	rating: Int
+	actors: [Actor]
+}
+type Director {
+	id: ID!
+	name: String!
+	birthday: DateTime
+	country: String
+}
+
+type Actor {
+	id: ID!
+	name: String!
+	birthday: DateTime
+	country: String
+	directors: [Director]
 }

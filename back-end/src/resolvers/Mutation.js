@@ -19,7 +19,6 @@ const Mutations = {
       token,
       user,
     };
-
     return userAuth;
   },
   async login(parent, { name, password }, ctx) {
