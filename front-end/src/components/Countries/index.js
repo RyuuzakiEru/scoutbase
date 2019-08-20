@@ -17,10 +17,8 @@ const ALL_COUNTRIES_QUERY = gql`
               name
             }
             languages {
-            
               name
               native
-           
             }
             emoji
         }
@@ -47,6 +45,7 @@ const Countries = () => {
 
   return (
   <Center>
+    <p>ALL COUNTRIES</p>
     <CountryList>
     {data.countries.map(country => (
       <CountryItem country={country} />

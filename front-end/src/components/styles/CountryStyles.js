@@ -1,16 +1,20 @@
 import styled from 'styled-components';
 
 const CountryStyles = styled.div`
-  background: white;
+  -webkit-box-shadow: 10px 9px 26px 0px rgba(204,204,204,1);
+  -moz-box-shadow: 10px 9px 26px 0px rgba(204,204,204,1);
+  box-shadow: 10px 9px 26px 0px rgba(204,204,204,1);
   position: relative;
   display: flex;
   flex-direction: column;
+  align-content: center;
+  a{
+    text-decoration: none;
+  }
   p {
     font-size: 12px;
-    line-height: 0.9;
-    font-weight: 300;
+    font-weight: 200;
     flex-grow: 1;
-    padding: 0 3rem;
     font-size: 1.2rem;
   }
 `;
