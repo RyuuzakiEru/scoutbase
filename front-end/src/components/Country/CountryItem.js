@@ -12,7 +12,7 @@ const CountryItem = (props) => {
             <small>{native}</small>
             <Link to={`/countries/${continent.code}`}><small>{continent.name} ({continent.code})</small></Link>
             <p>Languages:</p>
-            {languages.map(({name, native}) => (<small>{name} ({native})</small>))}
+            {languages.map(({code, name, native}) => (<small key={code}>{name} ({native})</small>))}
         </CountryStyles>
     )
 }

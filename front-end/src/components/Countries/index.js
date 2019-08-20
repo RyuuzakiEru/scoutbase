@@ -3,7 +3,7 @@ import { gql } from "apollo-boost";
 import { useQuery } from '@apollo/react-hooks';
 import styled from "styled-components";
 
-import CountryItem from './CountryItem';
+import CountryItem from '../Country/CountryItem';
 
 
 
@@ -12,10 +12,12 @@ const ALL_COUNTRIES_QUERY = gql`
         countries {
             name
             native
+            phone
             continent {
               code
               name
             }
+            currency
             languages {
               name
               native
@@ -48,7 +50,7 @@ const Countries = () => {
     <p>ALL COUNTRIES</p>
     <CountryList>
     {data.countries.map(country => (
-      <CountryItem country={country} />
+      <CountryItem key={country.code} country={country} />
     ))}
     </CountryList>
   </Center>);

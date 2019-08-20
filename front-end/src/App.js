@@ -6,7 +6,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Header from './components/Navigation/Header';
 
 import Home from './components/Home'
-import Countries from './components/Countries'
+import Continent from './components/Continent';
+import Countries from './components/Countries';
 
 
 
@@ -21,8 +22,8 @@ const App = () => {
       <Header />
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route path="/countries/:code" component={Continent} />
           <Route path="/countries" component={Countries} />
-          <Route path="/categories/:code"/>
         </Switch>
       </BrowserRouter>
     </ApolloProvider>
