@@ -54,7 +54,7 @@ const Continent = (props) => {
     const {name} = continent;
     return (
         <Center>
-            <p>Countries in {name} ({code})</p>
+            <h2>Countries in {name} ({code})</h2>
             <CountryList>
                 {continent.countries.map(country => (
                     <CountryItemDetail key={country.code} country={country} />

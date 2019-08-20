@@ -2,7 +2,6 @@ import React from 'react'
 import { gql } from "apollo-boost";
 import { useQuery } from '@apollo/react-hooks';
 import styled from "styled-components";
-
 import CountryItem from '../Country/CountryItem';
 
 
@@ -10,6 +9,7 @@ import CountryItem from '../Country/CountryItem';
 const ALL_COUNTRIES_QUERY = gql`
     query ALL_COUNTRIES_QUERY {
         countries {
+            code
             name
             native
             phone
@@ -19,6 +19,7 @@ const ALL_COUNTRIES_QUERY = gql`
             }
             currency
             languages {
+              code
               name
               native
             }
@@ -47,7 +48,7 @@ const Countries = () => {
 
   return (
   <Center>
-    <p>ALL COUNTRIES</p>
+    <h2>ALL COUNTRIES</h2>
     <CountryList>
     {data.countries.map(country => (
       <CountryItem key={country.code} country={country} />
